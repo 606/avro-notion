@@ -1,0 +1,6 @@
+@Avro.Notion.Api_HostAddress = http://localhost:5200
+
+GET {{Avro.Notion.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
