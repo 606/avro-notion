@@ -17,6 +17,10 @@ public static class NotionDatabaseConstants
     public static readonly NotionDataSourceMapping Tasks = new(
         DatabaseId: "SET_TASKS_DATABASE_ID",
         DataSourceId: "SET_TASKS_DATA_SOURCE_ID");
+
+    public static readonly NotionDataSourceMapping Projects = new(
+        DatabaseId: "2b4f418e66f3800a9891cc7b1663e71f",
+        DataSourceId: "SET_PROJECTS_DATA_SOURCE_ID");
 }
 
 public sealed record NotionDataSourceMapping(string DatabaseId, string DataSourceId);

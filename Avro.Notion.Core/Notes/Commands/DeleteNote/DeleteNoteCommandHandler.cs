@@ -2,14 +2,9 @@ using Avro.Notion.Core.Abstractions;
 
 namespace Avro.Notion.Core.Notes.Commands.DeleteNote;
 
-public sealed class DeleteNoteCommandHandler : IRequestHandler<DeleteNoteCommand, Unit>
+public sealed class DeleteNoteCommandHandler(INoteGateway noteGateway) : IRequestHandler<DeleteNoteCommand, Unit>
 {
-    private readonly INoteGateway _noteGateway;
-
-    public DeleteNoteCommandHandler(INoteGateway noteGateway)
-    {
-        _noteGateway = noteGateway ?? throw new ArgumentNullException(nameof(noteGateway));
-    }
+    private readonly INoteGateway _noteGateway = noteGateway ?? throw new ArgumentNullException(nameof(noteGateway));
 
     public async Task<Unit> Handle(DeleteNoteCommand request, CancellationToken cancellationToken)
     {

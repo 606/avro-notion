@@ -4,14 +4,9 @@ using Avro.Notion.Core.Domain.ValueObjects;
 
 namespace Avro.Notion.Core.Notes.Commands.CreateNote;
 
-public sealed class CreateNoteCommandHandler : IRequestHandler<CreateNoteCommand, Note>
+public sealed class CreateNoteCommandHandler(INoteGateway noteGateway) : IRequestHandler<CreateNoteCommand, Note>
 {
-    private readonly INoteGateway _noteGateway;
-
-    public CreateNoteCommandHandler(INoteGateway noteGateway)
-    {
-        _noteGateway = noteGateway ?? throw new ArgumentNullException(nameof(noteGateway));
-    }
+    private readonly INoteGateway _noteGateway = noteGateway ?? throw new ArgumentNullException(nameof(noteGateway));
 
     public async Task<Note> Handle(CreateNoteCommand request, CancellationToken cancellationToken)
     {

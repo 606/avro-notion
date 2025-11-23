@@ -13,14 +13,9 @@ namespace Avro.Notion.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public sealed class NotesController : ControllerBase
+public sealed class NotesController(IMediator mediator) : ControllerBase
 {
-    private readonly IMediator _mediator;
-
-    public NotesController(IMediator mediator)
-    {
-        _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
-    }
+    private readonly IMediator _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
 
     [HttpGet]
     [ProducesResponseType(typeof(PaginatedList<NoteSummary>), StatusCodes.Status200OK)]

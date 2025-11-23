@@ -3,16 +3,12 @@ using System.Text.Json;
 
 namespace Avro.Notion.Api.Middleware;
 
-public sealed class HttpRequestExceptionHandlingMiddleware
+public sealed class HttpRequestExceptionHandlingMiddleware(
+    RequestDelegate next,
+    ILogger<HttpRequestExceptionHandlingMiddleware> logger)
 {
-    private readonly RequestDelegate _next;
-    private readonly ILogger<HttpRequestExceptionHandlingMiddleware> _logger;
-
-    public HttpRequestExceptionHandlingMiddleware(RequestDelegate next, ILogger<HttpRequestExceptionHandlingMiddleware> logger)
-    {
-        _next = next ?? throw new ArgumentNullException(nameof(next));
-        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-    }
+    private readonly RequestDelegate _next = next ?? throw new ArgumentNullException(nameof(next));
+    private readonly ILogger<HttpRequestExceptionHandlingMiddleware> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
     public async Task InvokeAsync(HttpContext context)
     {

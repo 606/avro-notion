@@ -49,24 +49,13 @@ public sealed class HttpRequestExceptionFilter : IExceptionFilter
 
     private void HandleInvalidOperationException(InvalidOperationException exception, ExceptionContext context)
     {
-        var looksLikeClientInput = exception.Message.Contains("placeholder", StringComparison.OrdinalIgnoreCase);
-        var statusCode = looksLikeClientInput
-            ? StatusCodes.Status400BadRequest
-            : StatusCodes.Status500InternalServerError;
-
-        if (looksLikeClientInput)
-        {
-            _logger.LogWarning(exception, "Request failed due to invalid client-provided identifiers");
-        }
-        else
-        {
-            _logger.LogError(exception, "Request failed due to invalid configuration");
-        }
+        const int statusCode = StatusCodes.Status400BadRequest;
+        _logger.LogError(exception, "Request failed due to invalid configuration");
 
         var problem = new ProblemDetails
         {
             Status = statusCode,
-            Title = looksLikeClientInput ? "Request validation error" : "Configuration error",
+            Title = "Configuration error",
             Detail = exception.Message,
             Type = $"https://developer.mozilla.org/docs/Web/HTTP/Status/{statusCode}"
         };

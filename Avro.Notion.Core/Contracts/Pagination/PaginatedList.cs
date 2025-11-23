@@ -1,19 +1,12 @@
 namespace Avro.Notion.Core.Contracts.Pagination;
 
-public sealed class PaginatedList<T>
+public sealed class PaginatedList<T>(IReadOnlyList<T> items, string? nextCursor, bool hasMore)
 {
-    public PaginatedList(IReadOnlyList<T> items, string? nextCursor, bool hasMore)
-    {
-        Items = items ?? throw new ArgumentNullException(nameof(items));
-        NextCursor = nextCursor;
-        HasMore = hasMore;
-    }
+    public IReadOnlyList<T> Items { get; } = items ?? throw new ArgumentNullException(nameof(items));
 
-    public IReadOnlyList<T> Items { get; }
+    public string? NextCursor { get; } = nextCursor;
 
-    public string? NextCursor { get; }
+    public bool HasMore { get; } = hasMore;
 
-    public bool HasMore { get; }
-
-    public static PaginatedList<T> Empty() => new(Array.Empty<T>(), null, false);
+    public static PaginatedList<T> Empty() => new([], null, false);
 }

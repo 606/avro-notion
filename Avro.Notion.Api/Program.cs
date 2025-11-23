@@ -3,7 +3,6 @@ using Avro.Notion.Api.Notion;
 using Avro.Notion.Core.Notes.Commands.CreateNote;
 using Avro.Notion.Infrastructure.DependencyInjection;
 using Avro.Notion.Infrastructure.Options;
-using MediatR;
 using Scalar.AspNetCore;
 using Serilog;
 

@@ -2,8 +2,8 @@ namespace Avro.Notion.Core.Contracts.Pagination;
 
 public sealed class PaginationOptions
 {
-    public const int MinPageSize = 1;
-    public const int MaxPageSize = 100;
+    private const int MinPageSize = 1;
+    private const int MaxPageSize = 100;
     public const int DefaultPageSize = 25;
 
     public int PageSize { get; }

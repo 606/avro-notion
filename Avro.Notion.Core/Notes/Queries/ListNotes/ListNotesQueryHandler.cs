@@ -4,14 +4,10 @@ using Avro.Notion.Core.Domain.Entities;
 
 namespace Avro.Notion.Core.Notes.Queries.ListNotes;
 
-public sealed class ListNotesQueryHandler : IRequestHandler<ListNotesQuery, PaginatedList<NoteSummary>>
+public sealed class ListNotesQueryHandler(INoteGateway noteGateway)
+    : IRequestHandler<ListNotesQuery, PaginatedList<NoteSummary>>
 {
-    private readonly INoteGateway _noteGateway;
-
-    public ListNotesQueryHandler(INoteGateway noteGateway)
-    {
-        _noteGateway = noteGateway ?? throw new ArgumentNullException(nameof(noteGateway));
-    }
+    private readonly INoteGateway _noteGateway = noteGateway ?? throw new ArgumentNullException(nameof(noteGateway));
 
     public Task<PaginatedList<NoteSummary>> Handle(ListNotesQuery request, CancellationToken cancellationToken)
     {
