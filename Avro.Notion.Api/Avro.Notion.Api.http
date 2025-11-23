@@ -1,6 +1,49 @@
-@Avro.Notion.Api_HostAddress = http://localhost:5200
+@host = http://localhost:5200
+@noteId = REPLACE_WITH_NOTE_ID
 
-GET {{Avro.Notion.Api_HostAddress}}/weatherforecast/
+###
+# List notes (paged)
+GET {{host}}/api/notes?pageSize=10
+Accept: application/json
+
+###
+# Create a new note
+POST {{host}}/api/notes
+Content-Type: application/json
+Accept: application/json
+
+{
+	"title": "Demo Note",
+	"content": "Captured via REST Client",
+	"properties": {
+		"status": "draft",
+		"priority": "medium"
+	}
+}
+
+###
+# Get a note by id
+GET {{host}}/api/notes/{{noteId}}
+Accept: application/json
+
+###
+# Update a note
+PUT {{host}}/api/notes/{{noteId}}
+Content-Type: application/json
+Accept: application/json
+
+{
+	"title": "Updated Demo Note",
+	"content": "Updated via REST Client",
+	"properties": {
+		"status": "published",
+		"priority": "high"
+	}
+}
+
+###
+# Delete a note
+DELETE {{host}}/api/notes/{{noteId}}
 Accept: application/json
 
 ###

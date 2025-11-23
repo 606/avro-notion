@@ -9,7 +9,7 @@ internal static class NotionPayloadFactory
     {
         return new
         {
-            parent = new { database_id = options.DatabaseId },
+            parent = new { type = "data_source_id", data_source_id = options.DataSourceId },
             properties = BuildProperties(draft, options)
         };
     }

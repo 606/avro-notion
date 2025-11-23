@@ -116,7 +116,7 @@ internal sealed class NotionNoteGateway : INoteGateway
 
     private Uri BuildPageUri(string pageId) => new($"/v1/pages/{pageId}", UriKind.Relative);
 
-    private Uri BuildQueryUri() => new($"/v1/databases/{_options.DatabaseId}/query", UriKind.Relative);
+    private Uri BuildQueryUri() => new($"/v1/data_sources/{_options.DataSourceId}/query", UriKind.Relative);
 
     private Task SendAsync(HttpMethod method, Uri uri, object? payload, CancellationToken cancellationToken)
         => _rateLimiter.ExecuteAsync(async ct =>
